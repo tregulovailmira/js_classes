@@ -8,10 +8,10 @@ export class MyArray{
     }
 
     pop() {
-        let lastElement = this[this.length-1];
+        let lastItem = this[this.length-1];
         delete this[this.length-1];
         this.length = this.length - 1;
-        return lastElement;
+        return lastItem;
     };
 
     push() {
@@ -62,5 +62,27 @@ export class MyArray{
             }
         }
         return newArray;
+    }
+
+    unshift(...args) {
+        const newArrLength = args.length + this.length;
+        for (let i = newArrLength - 1; i > args.length - 1; i--) {
+            this[i] = this[i - args.length];
+        }
+        for (let i = 0; i < args.length; i++) {
+            this[i] = args[i];
+        }
+        return this.length += args.length;
+    }
+
+    shift() {
+        const firstItem = this[0];
+        for (let i = 0; i < this.length - 1; i++) {
+            this[i] = this[i + 1];
+        }
+        delete this[this.length-1];
+        this.length -= 1;
+
+        return firstItem;
     }
 };

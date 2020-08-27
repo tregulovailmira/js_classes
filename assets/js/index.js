@@ -7,3 +7,9 @@ const myArr4 = new MyArray('99', '1010', undefined, undefined, undefined, 222, m
 console.log('myArr4: ', myArr4);
 const newMyArr = myArr4.flat(3);
 console.log('newMyArr: ', newMyArr);
+console.log('myArr: ', myArr);
+myArr.unshift(7,8,9,'10', 11, 12, 15);
+console.log('myArr: ', myArr);
+myArr.shift();
+console.log('myArr: ', myArr);
+
