@@ -1,3 +1,4 @@
+/*1) Переписать функцию-конструктор MyArray на классы. Дописать методы shift, unshift.*/
 export class MyArray{
     constructor(...items) {
         this.length = 0;
