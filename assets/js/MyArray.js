@@ -1,16 +1,17 @@
 /*1) Переписать функцию-конструктор MyArray на классы. Дописать методы shift, unshift.*/
-export class MyArray{
+export class MyArray {
     constructor(...items) {
         this.length = 0;
         for (let i = 0; i < items.length; i++) {
             this[this.length] = items[i];
             this.length++;
-        };
+        }
+        ;
     }
 
     pop() {
-        let lastItem = this[this.length-1];
-        delete this[this.length-1];
+        let lastItem = this[this.length - 1];
+        delete this[this.length - 1];
         this.length = this.length - 1;
         return lastItem;
     };
@@ -24,7 +25,7 @@ export class MyArray{
     };
 
     forEach(callback, thisArg = this) {
-        for(let i = 0; i < thisArg.length; i++) {
+        for (let i = 0; i < thisArg.length; i++) {
             callback(thisArg[i], i, thisArg);
         }
     };
@@ -34,7 +35,7 @@ export class MyArray{
         for (let i = 0; i < this.length; i++) {
             result.push(this[i]);
         }
-        for(let i = 0; i < array.length; i++) {
+        for (let i = 0; i < array.length; i++) {
             result.push(array[i]);
         }
         return result;
@@ -44,7 +45,7 @@ export class MyArray{
         return array instanceof MyArray;
     }
 
-    flat (depth = 1) {
+    flat(depth = 1) {
         let newArray = new MyArray();
         if (depth < 0) {
             console.error("depth must be a positive value");
@@ -54,8 +55,8 @@ export class MyArray{
             newArray = newArray.concat(this);
             return newArray;
         }
-        for(let i = 0; i < this.length; i++){
-            if(MyArray.isMyArray(this[i])) {
+        for (let i = 0; i < this.length; i++) {
+            if (MyArray.isMyArray(this[i])) {
                 const buffer = this[i].flat(depth - 1);
                 newArray = newArray.concat(buffer);
             } else if (this[i] !== undefined) {
@@ -81,28 +82,28 @@ export class MyArray{
         for (let i = 0; i < this.length - 1; i++) {
             this[i] = this[i + 1];
         }
-        delete this[this.length-1];
+        delete this[this.length - 1];
         this.length -= 1;
 
         return firstItem;
     }
 
     [Symbol.iterator]() {
-        return{
-            iterable: this,
-            iteration: 0,
-
-            next() {
-                if(this.iteration > this.iterable.length - 1){
-                    return {
-                        done: true
-                    }
-                }
-                return {
-                    value: this.iterable[this.iteration++],
-                    done: false,
-                }
-            }
-        }
+        return new MyArrayIterator(this);
     }
-};
+}
+
+class MyArrayIterator{
+    constructor(myArray) {
+        this.iterable = myArray;
+        this.iteration = 0;
+    }
+    next() {
+        return {
+            value: this.iterable[this.iteration++],
+            done: this.iteration > this.iterable.length,
+        };
+    }
+}
+
+
