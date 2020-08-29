@@ -16,6 +16,9 @@ console.log('newMyArr.shift: ', newMyArr);
 console.log('is includes item: ', isIncludesItem([1, 5, 6, 9, 12], 15));
 console.log('sum digits of number: ', sumDigitsOfNumber(173));
 console.log(getArrayWithUniqueItems([1,1,1,2,3,4,5,6,6,7,7,7,8,9,10], [43, 5, 55, 68]));
+for (let item of newMyArr) {
+    console.log(item);
+}
 
 //class RangeValidator
 const rangeValidator = new RangeValidator(4, 8);

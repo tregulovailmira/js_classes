@@ -86,4 +86,23 @@ export class MyArray{
 
         return firstItem;
     }
+
+    [Symbol.iterator]() {
+        return{
+            iterable: this,
+            iteration: 0,
+
+            next() {
+                if(this.iteration > this.iterable.length - 1){
+                    return {
+                        done: true
+                    }
+                }
+                return {
+                    value: this.iterable[this.iteration++],
+                    done: false,
+                }
+            }
+        }
+    }
 };
